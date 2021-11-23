@@ -1,3 +1,4 @@
+//Define these according to your configurations
 orgid = YOUR-ZOHO-ORGID;
 whmcs_id = 'ENTER-WHMCS-API-ID'; // your API ID, found in wrench->system->API credentials
 whmcs_secret = 'ENTER-WHMCS-API-SECRET'; // your API secret, found in wrench->system->API credentials
@@ -6,18 +7,17 @@ whmcs_accesskey = "ENTER-WHMCS-API-ACCESSKEY"; // your access key, found in your
 whmcs_customfield="ENTER-CUSTOMFIELD_ID"; // your custom field id, like "customfields2"
 zoho_addasstatus="draft"; // status type to add invoices to zoho books
 zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
+zoho_books_connection="bookscon"; //name of your books connection
 whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
 whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
 /*
-Query-loop for unpaid invoices in whmcs
-	Query-loop for invoice detail data in whmcs
-		Query-loop for client detail in whmcs
-			if cf has zohoid:
-				Create invoice in Zoho, mark as draft.
-				get zoho invoice number, add to whmcs invoice notes
-				change whmcs invoice to payment pending
+Made without warranty or support of any kind, may you find this useful, helpful or laughable
+Anthony George / tony@mediamanaged.com
 */
-info "-Getting unpaid invoices from WHMCS";
+
+
+
+info "-Getting "+whmcs_invoicesearchstatus+" invoices from WHMCS";
 headersBase = Map();
 headersBase.put("User-Agent","testing/1.0");
 headersBase.put("Accept","application/json");
@@ -29,7 +29,6 @@ parametersMap.put("action","GetInvoices");
 parametersMap.put("responsetype","json");
 parametersMap.put("accesskey",whmcs_accesskey);
 parametersMap.put("status",whmcs_invoicesearchstatus);
-//parametersMap.put("userid","285");
 whmcs_getInvoicesResp = invokeurl
     [
     url :whmcs_url
@@ -41,7 +40,7 @@ headers:headersBase
 whmcs_invoicesObj = whmcs_getInvoicesResp.getJson("invoices");
 whmcs_results=whmcs_getInvoicesResp.getJson("totalresults");
 if(whmcs_results=="0") {
-    info "-No unpaid invoices found";
+    info "-No "+whmcs_invoicesearchstatus+" invoices found";
 
 } else {
     whmcs_invoiceObj = whmcs_invoicesObj.getJson("invoice");
@@ -78,6 +77,7 @@ if(whmcs_results=="0") {
         whmcs_getinvoiceList = whmcs_getinvoiceitemObj.toJSONList();
         whmcs_userid = whmcs_getinvoiceResp.getJson("userid");
         whmcs_notes = whmcs_getinvoiceResp.getJson("notes");
+        whmcs_invoiceid = whmcs_getinvoiceResp.getJson("invoiceid");
         if(whmcs_notes!="") {
             info "-Notes are not empty on WHMCS Invoice "+whmcs_invoiceid+", skipping";
             msgsubject="WHMCS Invoice Importer";
@@ -90,7 +90,7 @@ if(whmcs_results=="0") {
             message: msgmessage
         ]
         } else {
-            whmcs_invoiceid = whmcs_getinvoiceResp.getJson("invoiceid");
+
             //we now have the userid, get the client info for the zohoid
             info
             "-Looking up user id " + whmcs_userid + "(" + whmcs_companyname + ") in WHMCS";
@@ -151,7 +151,7 @@ if(whmcs_results=="0") {
                 values.put("payment_terms", zoho_payment_terms);
                 values.put("reference_number", whmcs_invoiceid);
                 values.put("line_items", whmcs_lineitems);
-                createResp = zoho.books.createRecord("Invoices", orgid, values, "bookscon");
+                createResp = zoho.books.createRecord("Invoices", orgid, values, zoho_books_connection);
                 zoho_createInvoiceObj = createResp.getJSON("invoice");
                 zoho_invoice_id = zoho_createInvoiceObj.getJSON("invoice_id");
                 zoho_invoicenumber = zoho_createInvoiceObj.getJSON("invoice_number");
