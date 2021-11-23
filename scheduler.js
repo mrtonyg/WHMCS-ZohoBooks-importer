@@ -11,7 +11,7 @@ zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
 whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
 whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
 /*
-Made without warranty or support of any kind, may you find this useful, helpful or laughable
+I offer this code without warranty or support of any kind, hopefully it helps you. If you find this useful, donate a couple bucks to your favorite charity.
 Anthony George / tony@mediamanaged.com
 */
 
