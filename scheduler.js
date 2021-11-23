@@ -1,11 +1,11 @@
 orgid = YOUR-ZOHO-ORGID;
-whmcs_id = 'ENTER-WHMCS-API-ID';
-whmcs_secret = 'ENTER-WHMCS-API-SECRET';
+whmcs_id = 'ENTER-WHMCS-API-ID'; // your API ID, found in wrench->system->API credentials
+whmcs_secret = 'ENTER-WHMCS-API-SECRET'; // your API secret, found in wrench->system->API credentials
 whmcs_url = "YOUR-WHMCS-URL/includes/api.php";
-whmcs_accesskey = "ENTER-WHMCS-API-ACCESSKEY";
-whmcs_customfield="ENTER-CUSTOMFIELD_ID";
+whmcs_accesskey = "ENTER-WHMCS-API-ACCESSKEY"; // your access key, found in your whmcs_config.php file
+whmcs_customfield="ENTER-CUSTOMFIELD_ID"; // your custom field id, like "customfields2"
 zoho_addasstatus="draft"; // status type to add invoices to zoho books
-zoho_payment_terms="60";
+zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
 whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
 whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
 /*
