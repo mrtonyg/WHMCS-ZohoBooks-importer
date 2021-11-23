@@ -1,5 +1,5 @@
 //Define these according to your configurations
-orgid = YOUR-ZOHO-ORGID;
+zoho_orgid = YOUR-ZOHO-ORGID;
 whmcs_id = 'ENTER-WHMCS-API-ID'; // your API ID, found in wrench->system->API credentials
 whmcs_secret = 'ENTER-WHMCS-API-SECRET'; // your API secret, found in wrench->system->API credentials
 whmcs_url = "YOUR-WHMCS-URL/includes/api.php";
@@ -7,7 +7,7 @@ whmcs_accesskey = "ENTER-WHMCS-API-ACCESSKEY"; // your access key, found in your
 whmcs_customfield="ENTER-CUSTOMFIELD_ID"; // your custom field id, like "customfields2"
 zoho_addasstatus="draft"; // status type to add invoices to zoho books
 zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
-zoho_books_connection="bookscon"; //name of your books connection
+
 whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
 whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
 /*
@@ -151,7 +151,7 @@ if(whmcs_results=="0") {
                 values.put("payment_terms", zoho_payment_terms);
                 values.put("reference_number", whmcs_invoiceid);
                 values.put("line_items", whmcs_lineitems);
-                createResp = zoho.books.createRecord("Invoices", orgid, values, zoho_books_connection);
+                createResp = zoho.books.createRecord("Invoices", zoho_orgid, values, "bookscon");
                 zoho_createInvoiceObj = createResp.getJSON("invoice");
                 zoho_invoice_id = zoho_createInvoiceObj.getJSON("invoice_id");
                 zoho_invoicenumber = zoho_createInvoiceObj.getJSON("invoice_number");
