@@ -1,3 +1,4 @@
+I offer this code without warranty or support, hopefully it helps you. If you find this useful, donate a couple bucks to your favorite charity.
 # WHMCS-ZohoBooks-importer
 This, when used as a function in Zoho Books(ZB), will import invoices from WHMCS to ZB, with a bit of pre-configuration.
 
