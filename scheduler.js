@@ -1,21 +1,23 @@
 //Define these according to your configurations
-zoho_orgid = YOUR-ZOHO-ORGID;
 whmcs_id = 'ENTER-WHMCS-API-ID'; // your API ID, found in wrench->system->API credentials
 whmcs_secret = 'ENTER-WHMCS-API-SECRET'; // your API secret, found in wrench->system->API credentials
 whmcs_url = "YOUR-WHMCS-URL/includes/api.php";
 whmcs_accesskey = "ENTER-WHMCS-API-ACCESSKEY"; // your access key, found in your whmcs_config.php file
 whmcs_customfield="ENTER-CUSTOMFIELD_ID"; // your custom field id, like "customfields2"
+whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
+whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
+
+zoho_orgid = YOUR-ZOHO-ORGID;
 zoho_addasstatus="draft"; // status type to add invoices to zoho books
 zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
 
-whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
-whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
+
 /*
 I offer this code without warranty or support of any kind, hopefully it helps you. If you find this useful, donate a couple bucks to your favorite charity.
 Anthony George / tony@mediamanaged.com
 */
 
-
+statusEmailEntries=List();
 
 info "-Getting "+whmcs_invoicesearchstatus+" invoices from WHMCS";
 headersBase = Map();
