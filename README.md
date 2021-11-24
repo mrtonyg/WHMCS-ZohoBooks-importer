@@ -47,6 +47,5 @@ Create a "books connection" via the "Connections" link in the top left when crea
   * whmcs_customfield="ENTER-CUSTOMFIELD_ID"; // your custom field id, like "customfields2"
   * zoho_addasstatus="draft"; // status type to add invoices to zoho books
   * zoho_payment_terms="60"; // payment terms to add invoice with in zoho books
-  * zoho_books_connection="bookscon"; //name of your books connection
   * whmcs_invoicesearchstatus="unpaid"; // status type to look for invoices in WHMCS
   * whmcs_changestatusto="Payment Pending"; // status to change WHMCS invoices to after successful addition to zoho books
